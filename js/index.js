@@ -12,7 +12,7 @@ const template = `
     <div class="qt_action">
         <div class=""></div>
         <div>
-            <el-select  @change="changeLanguage" v-model="currToLanguage" class="m-2" placeholder="Select" size="small">
+            <el-select style="width:100%"  @change="changeLanguage" v-model="currToLanguage" class="m-2" placeholder="Select" size="small">
                 <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
             </el-select>
@@ -35,12 +35,12 @@ function initVue() {
                 currToLanguage: "zh",
                 options: [
                     {
-                        label: "日文",
-                        value: "jp"
-                    },
-                    {
                         label: "中文",
                         value: "zh"
+                    },
+                    {
+                        label: "日文",
+                        value: "jp"
                     },
                     {
                         label: "繁体中文",
@@ -84,17 +84,27 @@ function initVue() {
                 console.log("PPPPPPPPP");
                 if (window.getSelection) {
                     const textObj = window.getSelection();
-                    const textStr = handleText(textObj.toString())
+                    let textStr = handleText(textObj.toString())
+                    this.text = textStr;
+                    textStr += "%";
                     const textLen = textStr.length;
 
-                    let i = 0
-                    for (i = 0; i < textLen; i++) {
-                        if ((textStr[i] < 'a' || textStr[i] > 'z') && (textStr[i] < 'A' || textStr[i] > 'Z')) {
-                            break
+                    let start = 0;
+                    const words = [];
+                    for (let i = 0; i < textLen; i++) {
+                        if ((textStr[i] < 'a' || textStr[i] > 'z')
+                            && (textStr[i] < 'A' || textStr[i] > 'Z')) {
+                            if (i - start > 0) {
+                                words.push(textStr.substring(start, i));
+                            }
+                            console.log(`start:${start} , end:${i}`);
+                            start = i + 1;
                         }
                     }
 
-                    if (textLen > 0 && i === textLen) {
+                    console.log(words);
+
+                    if (textLen > 1 && words.length > 0) {
 
                         showBoxObj.style.display = "block";
                         const textInfo = textObj.getRangeAt(0).getBoundingClientRect();
@@ -102,13 +112,11 @@ function initVue() {
                         const y = textInfo.y;
                         const h = textInfo.height;
 
-                        //
-                        this.text = textStr;
                         showBoxObj.style.left = `${x}px`;
                         showBoxObj.style.top = `${y + h + 10}px`;
 
                         // 发送请求
-                        this.fetchTranslateResult(textStr.toLowerCase(), this.currToLanguage, (result) => {
+                        this.fetchTranslateResult(words.join(" ").toLowerCase(), this.currToLanguage, (result) => {
                             this.result = result;
                         })
                     } else {

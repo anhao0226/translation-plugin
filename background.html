@@ -12,11 +12,9 @@
         }
 
         #qt_wrap {
-            width: 300px;
-            height: 120px;
             box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
             border-radius: 4px;
-            background-color: seagreen;
+            /* background-color: seagreen; */
             position: fixed;
             z-index: 10001;
             left: 20px;
@@ -25,15 +23,12 @@
 
         #qt_wrap .container {
             width: 280px;
-            height: 100px;
-            padding: 10px 10px;
+            padding: 0 10px;
             /* background-color: pink; */
         }
 
         .text {
-            height: 50px;
-            line-height: 50px;
-            padding-left: 20px;
+            line-height: 30px;
         }
 
         .text:first-child {
@@ -43,8 +38,16 @@
 
         .qt_content {
             width: 180px;
-            /* background-color: royalblue; */
             display: inline-block;
+        }
+
+        .text_01 {
+            /* background-color: blueviolet; */
+            padding: 10px; 
+        }
+
+        .text_02 {
+            padding: 10px;
         }
 
         .qt_action {
@@ -90,7 +93,7 @@
         const App = {
             data() {
                 return {
-                    text: "Text",
+                    text: "This section describes how to use Element Plus in your project",
                     result: "Result",
                     currToLanguage: "zh",
                     options: [
