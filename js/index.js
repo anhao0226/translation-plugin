@@ -41,6 +41,14 @@ function initVue() {
                     {
                         label: "中文",
                         value: "zh"
+                    },
+                    {
+                        label: "繁体中文",
+                        value: "cht"
+                    },
+                    {
+                        label: "韩语",
+                        value: "kor"
                     }
                 ]
             }
