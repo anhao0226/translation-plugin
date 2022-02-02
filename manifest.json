@@ -1,0 +1,49 @@
+{
+    "manifest_version": 2,
+    "name": "demo01",
+    "version": "1.0.0",
+    "description": "chrome_plugin_demo",
+    "browser_action": {
+        "default_popup": "popup.html",
+        "default_icon": "icon.png"
+    },
+    "permissions": [
+        "tabs",
+        "contextMenus",
+        "activeTab",
+        "declarativeContent",
+        "storage",
+        "http://*/*",
+        "https://*/*"
+    ],
+    "icons": {
+        "16": "icon.png",
+        "48": "icon.png",
+        "128": "icon.png"
+    },
+    "background": {
+        "scripts": [
+            "js/background.js"
+        ],
+        "persistent": false
+    },
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+    "content_scripts": [
+        {
+            "matches": [
+                "http://*/*",
+                "https://*/*"
+            ],
+            "js": [
+                "js/vue.global.js",
+                "js/element-plus.js",
+                "js/index.js"
+            ],
+            "css": [
+                "css/index.css",
+                "css/element-plus.css"
+            ],
+            "run_at": "document_end"
+        }
+    ]
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' data: gap: https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *;connect-src *;script-src * 'unsafe-inline' 'unsafe-eval';">
+    <title>自动登录</title>
+    <link rel="stylesheet" href="element-plus.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #app {
+            width: 200px;
+            padding: 20px;
+            /* background-color: pink; */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <el-form v-loading="loading" label-position="top" label-width="100px" :rules="rules" style="max-width: 460px">
+            <el-form-item label="Email" prop="email">
+                <el-input v-model="email"></el-input>
+            </el-form-item>
+            <el-form-item label="Password" prop="password">
+                <el-input v-model="password"></el-input>
+            </el-form-item>
+            <el-button type="primary" style="width: 100%" @click="handleLogin">Login</el-button>
+        </el-form>
+    </div>
+    <!-- <script src="js/vue.global.js"></script>
+    <script src="js/index.full.js"></script>
+    <script src="js/popup.js"></script> -->
+
+</body>
+
+</html>

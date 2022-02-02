@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #qt_wrap {
+            width: 300px;
+            height: 120px;
+            box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
+            border-radius: 4px;
+            background-color: seagreen;
+            position: fixed;
+            z-index: 10001;
+            left: 20px;
+            top: 30px;
+        }
+
+        #qt_wrap .container {
+            width: 280px;
+            height: 100px;
+            padding: 10px 10px;
+            /* background-color: pink; */
+        }
+
+        .text {
+            height: 50px;
+            line-height: 50px;
+            padding-left: 20px;
+        }
+
+        .text:first-child {
+            border-bottom: 1px solid #eeeeee;
+
+        }
+
+        .qt_content {
+            width: 180px;
+            /* background-color: royalblue; */
+            display: inline-block;
+        }
+
+        .qt_action {
+            display: inline-block;
+            width: 80px;
+            padding: 0 10px;
+            /* background-color: rebeccapurple; */
+        }
+    </style>
+    <script src="./js/vue.global.js"></script>
+    <script src="./js/element-plus.js"></script>
+    <link rel="stylesheet" href="./css/element-plus.css">
+</head>
+
+<body>
+    <div id="qt_wrap">
+        <div class="container">
+            <div class="qt_content">
+                <div class="text text_01">
+                    <span>{{text}}</span>
+                </div>
+                <div class="text text_02">
+                    <span>{{result}}</span>
+                </div>
+            </div>
+            <div class="qt_action">
+                <div class="">
+                    
+                </div>
+                <div>
+                    <el-select v-model="currToLanguage" class="m-2" placeholder="Select" size="small">
+                        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                        </el-option>
+                    </el-select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        const App = {
+            data() {
+                return {
+                    text: "Text",
+                    result: "Result",
+                    currToLanguage: "zh",
+                    options: [
+                        {
+                            label: "日文",
+                            value: "jp"
+                        },
+                        {
+                            label: "中文",
+                            value: "zh"
+                        }
+                    ]
+                }
+            },
+
+            methods: {
+                changeLanguage(value) {
+                    this.currToLanguage = value;
+                }
+            },
+            mounted() {
+
+
+                
+                document.body.addEventListener("click", (e) => {
+                    if (window.getSelection) {
+                        const textObj = window.getSelection();
+                        const textStr = textObj.toString()
+                        const textLen = textStr.length;
+
+                        let i = 0
+                        for (i = 0; i < textLen; i++) {
+                            if ((textStr[i] < 'a' || textStr[i] > 'z') && (textStr[i] < 'A' || textStr[i] > 'Z')) {
+                                break
+                            }
+                        }
+
+                        if (textLen > 0 && i === textLen) {
+
+                            //showBoxObj.style.display = "block";
+                            const textInfo = textObj.getRangeAt(0).getBoundingClientRect();
+                            const x = textInfo.x;
+                            const y = textInfo.y;
+                            const h = textInfo.height;
+
+                            //
+                            this.text = textStr;
+                            // showBoxObj.style.left = `${x}px`;
+                            // showBoxObj.style.top = `${y + h + 10}px`;
+
+                            // 发送请求
+                            // const url = formatRequestUrl(textStr.toLowerCase());
+                            // chrome.runtime.sendMessage({ url });
+                            // chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+                            //     const result = request.value.trans_result[0].dst;
+                            //     this.result = result;
+                            //     sendResponse("0");
+                            // });
+                        }
+                    }
+                });
+            },
+        }
+        const app = Vue.createApp(App);
+        app.use(ElementPlus, { zIndex: 10001 });
+        app.mount('#qt_wrap');
+
+    </script>
+</body>
+
+</html>

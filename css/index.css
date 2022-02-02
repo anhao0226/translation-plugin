@@ -1,0 +1,50 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#qt_wrap {
+    width: 300px;
+    height: 120px;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
+    border-radius: 4px;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    transition: 0.3s;
+    background-color: #fff;
+    display: none;
+}
+
+#qt_wrap .container {
+    width: 280px;
+    height: 100px;
+    padding: 10px 10px;
+    /* background-color: pink; */
+}
+
+#qt_wrap .text {
+    height: 50px;
+    line-height: 50px;
+    padding-left: 20px;
+}
+
+#qt_wrap .text:first-child {
+    border-bottom: 1px solid #eeeeee;
+}
+
+#qt_wrap .qt_content {
+    width: 180px;
+    height: 100%;
+    /* background-color: royalblue; */
+    display: inline-block;
+}
+
+#qt_wrap .qt_action {
+    display: inline-block;
+    width: 80px;
+    padding: 0 10px;
+    height: 100%;
+    /* background-color: rebeccapurple; */
+}
